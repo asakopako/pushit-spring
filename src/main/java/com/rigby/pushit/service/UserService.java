@@ -22,4 +22,16 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public User login(String email, String password) {
+        if(!userRepository.existsByEmail(email))
+            throw new BadRequestException("Invalid credentials");
+
+        User user = userRepository.findByEmail(email);
+
+        if (!BCrypt.checkpw(password, user.getPassword()))
+            throw new BadRequestException("Invalid credentials");
+
+        return user;
+    }
+
 }
