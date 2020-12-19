@@ -1,6 +1,7 @@
 package com.rigby.pushit.config;
 
 import com.rigby.pushit.config.exception.BadRequestException;
+import com.rigby.pushit.config.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,5 +20,10 @@ public class ExceptionConfig {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> methodArgumentNotValidException(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid formatted values entered");
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<?> unauthorizedException(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 }

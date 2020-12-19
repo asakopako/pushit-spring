@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rigby.pushit.model.User;
 import com.rigby.pushit.model.request.LoginRequest;
 import com.rigby.pushit.model.response.LoginResponse;
+import com.rigby.pushit.security.SecurityIgnore;
 import com.rigby.pushit.service.UserService;
 import com.rigby.pushit.service.tool.JwtTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,14 @@ public class UserController {
     @Autowired private UserService userService;
 
 
+    @SecurityIgnore
     @PostMapping("/api/users/register")
     public ResponseEntity<Void> postRegister(@Valid @RequestBody User user) {
         userService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
+    @SecurityIgnore
     @PostMapping("/api/users/login")
     public ResponseEntity<LoginResponse> postLogin(@Valid @RequestBody LoginRequest loginRequest) {
 

@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired private UserRepository userRepository;
 
 
     public void register(User user) {
@@ -32,6 +31,10 @@ public class UserService {
             throw new BadRequestException("Invalid credentials");
 
         return user;
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
 }
