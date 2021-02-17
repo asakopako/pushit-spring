@@ -1,6 +1,7 @@
 package com.rigby.pushit.config;
 
 import com.rigby.pushit.config.exception.BadRequestException;
+import com.rigby.pushit.config.exception.NotFoundException;
 import com.rigby.pushit.config.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,10 @@ public class ExceptionConfig {
     public ResponseEntity<?> unauthorizedException(Exception e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> notFoundException(Exception e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
 }
