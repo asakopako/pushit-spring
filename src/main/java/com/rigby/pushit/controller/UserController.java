@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<LoginResponse> postLogin(@Valid @RequestBody LoginRequest loginRequest) {
 
         User user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
-
+        int i = 3;
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setId(user.getId());
         loginResponse.setEmail(user.getEmail());
